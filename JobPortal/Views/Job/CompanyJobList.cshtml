@@ -1,0 +1,97 @@
+﻿@model IEnumerable<MyEF.EF.PostJobTable>
+
+@{
+    ViewBag.Title = "Company Job List";
+}
+
+
+
+<p>
+    <h2>All Job Posts</h2>
+    @Html.ActionLink("New Job", "PostJob", "Job", null, new { @class = "btn btn-default mb-3", @style = "float:right" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            Min-Max Salary
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vacany)
+        </th>
+        <th>
+            Post Date
+        </th>
+        <th>
+            Last Date
+        </th>
+        <th>
+            Redirect To Url
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyTable.CompanyName)
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Nature
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @item.MinSalary - @item.MaxSalary Rupees
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vacany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationLastDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WebURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyTable.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobCategoryTable.JobCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobNatureTable.JobNature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobStatusTable.JobStatus)
+            </td>
+            <td>
+                @Html.ActionLink("View", "JobDetail", new { id = item.PostJobID }, new { @class = "genric-btn success circle mb-3" }) |
+                @Html.ActionLink("Requirements", "AddJobDetails", new { id = item.PostJobID }, new { @class = "genric-btn info circle" }) |
+                @Html.ActionLink("Delete", "DeletePostJob", new { id = item.PostJobID }, new { @class = "genric-btn danger circle mt-3" })
+            </td>
+        </tr>
+    }
+
+</table>
